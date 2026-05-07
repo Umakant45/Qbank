@@ -1,0 +1,112 @@
+[
+  {
+    "title": "What is the difference between C and C++?",
+    "content": "List the key differences between C and C++. Focus on object-oriented features and other enhancements.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Explain constructors and destructors",
+    "content": "What are constructors and destructors in C++? Explain different types of constructors with examples.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What is virtual function?",
+    "content": "Explain virtual functions in C++. How do they enable runtime polymorphism?",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Explain STL containers",
+    "content": "Describe the main STL containers: vector, list, deque, set, map. When should each be used?",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What are smart pointers?",
+    "content": "Explain smart pointers in modern C++: unique_ptr, shared_ptr, and weak_ptr. Why are they important?",
+    "difficulty": "hard"
+  },
+  {
+    "title": "Explain OOP concepts in C++",
+    "content": "C++ supports OOP concepts like Encapsulation, Inheritance, Polymorphism, and Abstraction.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What is function overloading?",
+    "content": "Function overloading allows multiple functions with the same name but different parameters in C++.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Explain inheritance in C++",
+    "content": "Inheritance allows a class to acquire properties and methods of another class. Example: class Derived : public Base {}",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What is polymorphism in C++?",
+    "content": "Polymorphism is the ability of a function, operator, or object to take different forms. Types: Compile-time and Runtime polymorphism.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What are templates in C++?",
+    "content": "Templates allow writing generic functions or classes that can work with any data type.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Compile-time vs runtime polymorphism",
+    "content": "Compile-time polymorphism is achieved using function/operator overloading. Runtime polymorphism is achieved using virtual functions.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Difference between structure and class in C++",
+    "content": "Structures have public members by default, while classes have private members by default.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "What are friend functions in C++?",
+    "content": "Friend functions can access private/protected members of a class using the friend keyword.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Program: operator overloading",
+    "content": "Write a C++ program to overload the '+' operator to add two complex numbers.",
+    "difficulty": "hard"
+  },
+  {
+    "title": "Program: demonstrate inheritance",
+    "content": "Write a C++ program to demonstrate single inheritance with a base and derived class.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Program: virtual functions",
+    "content": "Write a C++ program to demonstrate runtime polymorphism using virtual functions.",
+    "difficulty": "hard"
+  },
+  {
+    "title": "Classes and Objects",
+    "content": "Write a C++ class 'Car' with attributes brand and model, create an object and display values.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Vectors in STL",
+    "content": "Write C++ code to create a vector of integers, add elements, and display them.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Maps in STL",
+    "content": "Write C++ code to store student names and marks in a map and display them.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "File I/O Basics",
+    "content": "Write C++ code to create a file 'data.txt' and write some text into it.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Read from File",
+    "content": "Write C++ code to read contents of 'data.txt' and display on console.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Append to File",
+    "content": "Write C++ code to append text to an existing file.",
+    "difficulty": "medium"
+  }
+]

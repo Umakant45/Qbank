@@ -1,0 +1,117 @@
+[
+  {
+    "title": "Explain pointers in C",
+    "content": "What are pointers in C? How do you declare and use them? Provide examples of pointer arithmetic.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What is dynamic memory allocation?",
+    "content": "Explain malloc(), calloc(), realloc(), and free() functions. When and how should they be used?",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Difference between array and pointer",
+    "content": "What are the similarities and differences between arrays and pointers in C?",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Explain function pointers",
+    "content": "What are function pointers in C? How do you declare and use them? Provide practical examples.",
+    "difficulty": "hard"
+  },
+  {
+    "title": "What are storage classes in C?",
+    "content": "Explain different storage classes in C: auto, register, static, and extern. Provide examples.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What is C Programming?",
+    "content": "Explain the key features of the C language. Why is it called a middle-level language?",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Difference between Compiler and Interpreter",
+    "content": "Explain the difference between compiler and interpreter with examples.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Write a program to find factorial of a number",
+    "content": "Write a C program to calculate the factorial of a number.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Write a program to reverse a string without using strrev()",
+    "content": "Write a C program to reverse a string without using the strrev() function.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Call by value vs call by reference",
+    "content": "Explain with examples how functions can be called by value and reference.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Write a program to check prime number",
+    "content": "Write a C program to check whether a number is prime or not.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Explain Dynamic Memory Allocation in C",
+    "content": "What are malloc(), calloc(), realloc(), and free()? Explain with syntax.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Swap two numbers without third variable",
+    "content": "Write a C program to swap two numbers without using a third variable.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Write a program for Fibonacci series",
+    "content": "Write a C program to print Fibonacci series up to n terms.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Explain Structures vs Unions",
+    "content": "What are structures and unions in C? How do they differ in memory allocation?",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Sum of array elements",
+    "content": "Write a C program to calculate the sum of all elements in an array.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "What is Recursion?",
+    "content": "Explain recursion in C with example program (factorial, Fibonacci).",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Find largest number in an array",
+    "content": "Write a C program to find the largest number in an array.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Explain File Handling in C",
+    "content": "What are fopen(), fclose(), fprintf(), fscanf()? Explain with an example.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Check palindrome string",
+    "content": "Write a C program to check whether a string is palindrome or not.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Difference between gets() and fgets()",
+    "content": "Explain why gets() is unsafe and why fgets() should be preferred.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Implement Bubble Sort",
+    "content": "Write a C program to sort elements using Bubble Sort algorithm.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Explain Preprocessor Directives",
+    "content": "What are #include, #define, #ifdef, #ifndef? Explain with examples.",
+    "difficulty": "medium"
+  }
+]

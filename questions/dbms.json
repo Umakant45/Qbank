@@ -1,0 +1,117 @@
+[
+  {
+    "title": "What is database normalization?",
+    "content": "Explain database normalization. Describe 1NF, 2NF, 3NF, and BCNF with examples.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Explain ACID properties",
+    "content": "What are ACID properties in database transactions? Explain Atomicity, Consistency, Isolation, and Durability.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "SQL query: second highest salary",
+    "content": "Write a SQL query to find the employee with the second highest salary from an Employee table.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What are database indexes?",
+    "content": "Explain database indexes. What are the different types of indexes and when should they be used?",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Explain different types of joins",
+    "content": "Describe INNER, LEFT, RIGHT, FULL OUTER, and CROSS join with examples.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What is DBMS?",
+    "content": "DBMS (Database Management System) is software used to store, manage, and retrieve data efficiently.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "DBMS vs RDBMS",
+    "content": "DBMS stores data as files, while RDBMS stores data in tables with relationships. RDBMS supports normalization, keys, and SQL.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "SQL: fetch all records from students table",
+    "content": "Query: Retrieve all columns and rows from the students table.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "SQL: find highest salary",
+    "content": "Query: Retrieve the maximum salary value from the employees table.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Types of keys in DBMS",
+    "content": "Primary Key, Foreign Key, Candidate Key, Composite Key, and Unique Key.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "SQL: count students in class10",
+    "content": "Query: Count total rows in class10 table.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "SQL: employees with salary > 50000",
+    "content": "Query: Retrieve employee details with salary greater than 50000.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "What is a view in SQL?",
+    "content": "A view is a virtual table created using a SQL query. It does not store data itself but fetches it from base tables.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What is a primary key?",
+    "content": "A primary key is a unique identifier for each record in a table. It cannot have NULL values and must be unique.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "What is a foreign key?",
+    "content": "A foreign key is a field in one table that refers to the primary key in another table, establishing a relationship.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "SQL: average marks from students",
+    "content": "Query: Calculate average marks of all students.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "DELETE vs TRUNCATE",
+    "content": "DELETE removes rows one by one with optional WHERE clause. TRUNCATE removes all rows quickly without logging individual deletions.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What is a transaction in DBMS?",
+    "content": "A transaction is a sequence of operations performed as a single logical unit that must satisfy ACID properties.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What is denormalization?",
+    "content": "Denormalization introduces redundancy into a table to improve read performance by reducing joins.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Clustered vs non-clustered indexes",
+    "content": "Clustered index defines physical order of data in a table, while non-clustered index creates a separate structure pointing to data.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "SQL: update salary by 10 percent",
+    "content": "Query: Increase salary of every employee by 10%.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "SQL: employees in IT department",
+    "content": "Query: Retrieve employee records where department = 'IT'.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "What is deadlock in DBMS?",
+    "content": "A deadlock occurs when two or more transactions wait indefinitely for each other to release locks. Explain prevention strategies.",
+    "difficulty": "hard"
+  }
+]

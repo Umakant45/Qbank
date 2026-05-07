@@ -1,0 +1,102 @@
+[
+  {
+    "title": "What is the CSS box model?",
+    "content": "Explain the CSS box model. Describe content, padding, border, and margin with examples.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Difference between flexbox and grid",
+    "content": "What are the differences between CSS Flexbox and CSS Grid? When should you use each?",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What are CSS selectors?",
+    "content": "Explain different types of CSS selectors: element, class, id, attribute, pseudo-class, and pseudo-element selectors.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Explain CSS positioning",
+    "content": "Describe different CSS position properties: static, relative, absolute, fixed, and sticky.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What are CSS animations?",
+    "content": "How do you create animations in CSS? Explain @keyframes, transition, and animation properties.",
+    "difficulty": "hard"
+  },
+  {
+    "title": "What is CSS?",
+    "content": "CSS (Cascading Style Sheets) is used to style and layout HTML elements, including colors, fonts, and positioning.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Types of CSS",
+    "content": "Inline CSS, Internal CSS, and External CSS are the three types used for styling web pages.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Relative, absolute, and fixed positioning",
+    "content": "Relative positions element based on its normal position, absolute positions relative to its parent, fixed positions relative to the viewport.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What are pseudo-classes in CSS?",
+    "content": "Pseudo-classes define the state of an element like :hover, :active, :nth-child().",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Relative units vs absolute units",
+    "content": "Relative units adjust based on parent or root size, while absolute units remain fixed regardless of screen size.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Center a div horizontally",
+    "content": "Style a div so that it is horizontally centered on the webpage.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Inline, block, and inline-block display",
+    "content": "inline: fits in line with other text, block: takes full width, inline-block: inline element with block properties.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What are media queries in CSS?",
+    "content": "Media queries are used for responsive design, applying styles based on device width, height, or type.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "CSS transitions",
+    "content": "Transitions allow smooth changes between property values like color, size, or position over time.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Difference between inline CSS and external CSS",
+    "content": "Inline CSS is written directly in HTML tags, while external CSS is written in a separate .css file and linked.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "CSS grid layout with 3 columns",
+    "content": "Create a grid container that arranges child elements in three equal columns.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "em/rem vs viewport units (vw, vh)",
+    "content": "em/rem are based on font sizes, while vw/vh are based on the viewport width/height.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "CSS custom properties (variables)",
+    "content": "Explain CSS variables (--name). How do you define and use them? How are they used in theming?",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Hover effect that changes background color",
+    "content": "Make a button's background color change from blue to red when hovered.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "CSS specificity",
+    "content": "Explain how CSS specificity is calculated. What is the order of precedence for inline styles, IDs, classes, elements?",
+    "difficulty": "medium"
+  }
+]

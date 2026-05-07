@@ -1,0 +1,138 @@
+
+   [
+    {
+      "title": "What is hoisting in JavaScript?",
+      "content": "Explain hoisting in JavaScript. How does it work with var, let, const, and function declarations?",
+      "difficulty": "medium"
+    },
+    {
+      "title": "Difference between == and ===",
+      "content": "What's the difference between == and === operators in JavaScript? Provide examples.",
+      "difficulty": "easy"
+    },
+    {
+      "title": "What are closures?",
+      "content": "Explain closures in JavaScript. Provide examples and discuss their practical applications.",
+      "difficulty": "hard"
+    },
+    {
+      "title": "What is the event loop?",
+      "content": "Explain the JavaScript event loop. How does asynchronous execution work in JavaScript?",
+      "difficulty": "hard"
+    },
+    {
+      "title": "What are arrow functions?",
+      "content": "Explain arrow functions in ES6. How do they differ from regular functions, especially regarding 'this' binding?",
+      "difficulty": "medium"
+    },
+    {
+      "title": "What is JavaScript?",
+      "content": "JavaScript is a lightweight, interpreted programming language used to make web pages interactive.",
+      "difficulty": "easy"
+    },
+    {
+      "title": "Data types in JavaScript",
+      "content": "String, Number, Boolean, Undefined, Null, Symbol, BigInt, and Object.",
+      "difficulty": "easy"
+    },
+    {
+      "title": "Difference between var, let, and const",
+      "content": "var: function scoped, let: block scoped, const: block scoped with immutable reference.",
+      "difficulty": "medium"
+    },
+    {
+      "title": "What are JavaScript objects?",
+      "content": "Objects are collections of key-value pairs used to store data and methods.",
+      "difficulty": "easy"
+    },
+    {
+      "title": "Program: reverse a string",
+      "content": "Take a string input and print the reversed version of it.",
+      "difficulty": "medium"
+    },
+    {
+      "title": "What is an array in JavaScript?",
+      "content": "An array is a special object used to store multiple values in a single variable.",
+      "difficulty": "easy"
+    },
+    {
+      "title": "Program: largest number in an array",
+      "content": "Given an array of numbers, find and display the maximum value.",
+      "difficulty": "medium"
+    },
+    {
+      "title": "What are JavaScript functions?",
+      "content": "Functions are blocks of reusable code designed to perform a specific task.",
+      "difficulty": "easy"
+    },
+    {
+      "title": "Program: Fibonacci series",
+      "content": "Display the first n terms of the Fibonacci sequence.",
+      "difficulty": "medium"
+    },
+    {
+      "title": "Difference between null and undefined",
+      "content": "undefined means a variable has been declared but not assigned; null is an assignment value meaning empty.",
+      "difficulty": "easy"
+    },
+    {
+      "title": "Program: palindrome check",
+      "content": "Take a string input and check if it reads the same forward and backward.",
+      "difficulty": "medium"
+    },
+    {
+      "title": "What are JavaScript events?",
+      "content": "Events are actions in the browser (like clicks, key presses) that can be handled with code.",
+      "difficulty": "easy"
+    },
+    {
+      "title": "Program: count vowels in a string",
+      "content": "Read a string and count the number of vowels (a, e, i, o, u).",
+      "difficulty": "medium"
+    },
+    {
+      "title": "What is the DOM in JavaScript?",
+      "content": "The Document Object Model represents the structure of HTML/XML documents that can be accessed and manipulated with JavaScript.",
+      "difficulty": "easy"
+    },
+    {
+      "title": "Program: sort an array of numbers",
+      "content": "Take an array and sort its elements in ascending order.",
+      "difficulty": "medium"
+    },
+    {
+      "title": "What are JavaScript promises?",
+      "content": "Promises represent the result of an asynchronous operation, with states: pending, fulfilled, or rejected.",
+      "difficulty": "medium"
+    },
+    {
+      "title": "Program: factorial of a number",
+      "content": "Take an integer n and calculate its factorial using a loop.",
+      "difficulty": "medium"
+    },
+    {
+      "title": "Program: find duplicate elements in array",
+      "content": "Write a JavaScript program to find duplicate elements in an array.",
+      "difficulty": "hard"
+    },
+    {
+      "title": "Object iteration",
+      "content": "Write JavaScript code to iterate through all properties of an object and print keys and values.",
+      "difficulty": "medium"
+    },
+    {
+      "title": "Form validation",
+      "content": "Write JavaScript code to validate a form ensuring name is not empty and email is valid.",
+      "difficulty": "hard"
+    },
+    {
+      "title": "Program: sum of array elements",
+      "content": "Write a JavaScript program to calculate the sum of all elements in an array.",
+      "difficulty": "easy"
+    },
+    {
+      "title": "Program: prime number check",
+      "content": "Write a JavaScript function to check whether a number is prime.",
+      "difficulty": "medium"
+    }
+  ]

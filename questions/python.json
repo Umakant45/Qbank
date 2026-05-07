@@ -1,0 +1,252 @@
+[
+    {
+      "title": "What is Python?",
+      "content": "Explain what Python is and why it is called a high-level programming language.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Who developed Python?",
+      "content": "Name the creator of Python and the year it was created.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Python Features",
+      "content": "List five main features of Python programming language.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Dynamic Typing",
+      "content": "Explain what dynamic typing means in Python.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Interpreted Language",
+      "content": "Why is Python called an interpreted language?",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Python Identifiers",
+      "content": "What are identifiers in Python and what are the naming rules?",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Keywords in Python",
+      "content": "What are Python keywords? Give any five examples.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Data Types in Python",
+      "content": "List Python's built-in data types.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Mutable and Immutable",
+      "content": "Explain mutable and immutable data types with examples.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Operators in Python",
+      "content": "What are operators? Explain arithmetic, relational, and logical operators.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Type Casting",
+      "content": "What is type casting in Python? Give examples.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Functions in Python",
+      "content": "What is a function? How is it defined in Python?",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Lambda Function",
+      "content": "What is a lambda function in Python? Give an example.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Modules and Packages",
+      "content": "What are modules and packages in Python?",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Global and Local Variables",
+      "content": "Explain the difference between global and local variables.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Docstrings",
+      "content": "What are docstrings? How are they used in Python?",
+      "difficulty": "theory"
+    },
+    {
+      "title": "File Handling in Python",
+      "content": "Explain file handling and different file modes in Python.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Exception Handling",
+      "content": "What is exception handling? Explain try, except, else, and finally blocks.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Object-Oriented Programming",
+      "content": "Explain the concept of OOP in Python with an example.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Inheritance in Python",
+      "content": "What is inheritance in Python? Mention its types.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Polymorphism",
+      "content": "Explain polymorphism with a simple example in Python.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Encapsulation",
+      "content": "What is encapsulation in Python? Give an example using classes.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "List vs Tuple",
+      "content": "Differentiate between a list and a tuple.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Dictionary in Python",
+      "content": "What is a dictionary in Python? How do you access elements?",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Set in Python",
+      "content": "What is a set? Write any two operations performed on a set.",
+      "difficulty": "theory"
+    },
+    {
+      "title": "Program: Print Hello World",
+      "content": "Write a Python program to print 'Hello, World!'.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Add Two Numbers",
+      "content": "Write a Python program to add two numbers entered by the user.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Check Even or Odd",
+      "content": "Write a Python program to check whether a number is even or odd.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Find Factorial",
+      "content": "Write a Python program to find the factorial of a given number.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Check Prime Number",
+      "content": "Write a Python program to check if a number is prime.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Fibonacci Sequence",
+      "content": "Write a Python program to print the Fibonacci sequence up to N terms.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Sum of Digits",
+      "content": "Write a Python program to find the sum of digits of a number.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Reverse a String",
+      "content": "Write a Python program to reverse a string entered by the user.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Palindrome Check",
+      "content": "Write a Python program to check if a string is palindrome or not.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Count Vowels",
+      "content": "Write a Python program to count vowels in a string.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Find Largest Number",
+      "content": "Write a Python program to find the largest of three numbers.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Area of Circle",
+      "content": "Write a Python program to find the area of a circle given the radius.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: LCM of Two Numbers",
+      "content": "Write a Python program to find the LCM of two numbers.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: GCD of Two Numbers",
+      "content": "Write a Python program to find the GCD of two numbers.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Sum of List Elements",
+      "content": "Write a Python program to find the sum of all elements in a list.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Second Largest in List",
+      "content": "Write a Python program to find the second largest element in a list.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Sort a List",
+      "content": "Write a Python program to sort a list in ascending order without using sort().",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Count Characters in String",
+      "content": "Write a Python program to count frequency of each character in a string.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: File Write and Read",
+      "content": "Write a Python program to write user input to a file and then read it back.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Check Armstrong Number",
+      "content": "Write a Python program to check if a number is an Armstrong number.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Sum of Even Numbers",
+      "content": "Write a Python program to find the sum of first N even numbers.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: List of Prime Numbers",
+      "content": "Write a Python program to print all prime numbers in a given range.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Matrix Addition",
+      "content": "Write a Python program to add two matrices of same size.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: OOP Student Class",
+      "content": "Write a Python class Student with attributes name and marks, and display details.",
+      "difficulty": "program"
+    },
+    {
+      "title": "Program: Simple Calculator",
+      "content": "Write a Python program that performs +, -, *, / operations based on user input.",
+      "difficulty": "program"
+    }
+  ]

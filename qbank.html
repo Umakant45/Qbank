@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programming QBank — Training & Placement Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="qbank.css">
+</head>
+<body>
+
+<!-- ==================== LOGIN PAGE ==================== -->
+<div id="page-login" class="page active">
+  <div class="login-wrap">
+    <div class="login-brand fade-up">
+      <div class="login-brand-logo">
+        <div class="logo-icon">📚</div>
+        QBank
+      </div>
+      <p>Training &amp; Placement Portal · SYBCS C</p>
+    </div>
+    <div class="login-card fade-up-1">
+      <h2>Welcome back 👋</h2>
+      <p class="sub">Enter your details to start practising interview &amp; exam questions</p>
+      <div class="lfield">
+        <label>Your Name</label>
+        <input type="text" id="inp-name" placeholder="e.g. Umakant Kautkar" autocomplete="name">
+      </div>
+      <div class="lfield">
+        <label>Email Address</label>
+        <input type="email" id="inp-email" placeholder="e.g. uma@college.edu" autocomplete="email">
+      </div>
+      <button class="btn-login" id="login-btn">Get Started →</button>
+    </div>
+    <div class="login-stats fade-up-2">
+      <div class="lstat">
+        <div class="lstat-num">8</div>
+        <div class="lstat-lbl">Subjects</div>
+      </div>
+      <div class="lstat">
+        <div class="lstat-num" id="total-q-count">—</div>
+        <div class="lstat-lbl">Questions</div>
+      </div>
+      <div class="lstat">
+        <div class="lstat-num">∞</div>
+        <div class="lstat-lbl">Practice</div>
+      </div>
+    </div>
+    <div class="login-footer fade-up-3">Created by <strong style="color:var(--tx2)">Umakant Kautkar</strong></div>
+  </div>
+</div>
+
+<!-- ==================== MAIN PAGE ==================== -->
+<div id="page-main" class="page">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <span class="topbar-logo">📚 QBank</span>
+    <span class="topbar-center" id="topbar-center">Training &amp; Placement</span>
+    <button class="profile-btn" id="profile-btn" title="Your profile">?</button>
+  </div>
+
+  <!-- SUBJECTS VIEW -->
+  <div id="view-subjects" class="main-body">
+    <div class="view-header fade-up">
+      <div class="view-title">Choose a Subject</div>
+      <div class="view-sub">Select a topic to practise interview and exam questions</div>
+    </div>
+    <div class="subjects-grid" id="subjects-grid"></div>
+    <div class="footer">Created by <strong>Umakant Kautkar</strong> · SYBCS C</div>
+  </div>
+
+  <!-- QUESTIONS VIEW -->
+  <div id="view-questions" class="main-body" style="display:none">
+    <div class="q-toprow">
+      <button class="back-btn" id="back-btn">← Subjects</button>
+      <span class="q-subject-name" id="q-subj-name"></span>
+      <span class="q-badge-counter" id="q-counter">Q 1 / 1</span>
+    </div>
+    <div class="q-stats">
+      <div class="stat-card">
+        <div class="stat-num" id="st-total">0</div>
+        <div class="stat-lbl">Total Qs</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num green" id="st-done">0</div>
+        <div class="stat-lbl">Marked Done</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num pink" id="st-cur">1</div>
+        <div class="stat-lbl">Current</div>
+      </div>
+    </div>
+    <div class="q-pbar-wrap">
+      <div class="q-pbar-top">
+        <span id="pbar-label">Progress</span>
+        <span id="pbar-pct">0%</span>
+      </div>
+      <div class="q-pbar"><div class="q-pbar-fill" id="q-pbar-fill" style="width:0%"></div></div>
+    </div>
+    <div class="q-card" id="q-card">
+      <div class="q-card-meta">
+        <span class="q-num-pill" id="q-num-pill">Q1</span>
+        <span class="diff-badge" id="q-diff-badge">easy</span>
+      </div>
+      <div class="q-card-title" id="q-title"></div>
+      <div class="q-card-content" id="q-content"></div>
+    </div>
+    <div class="solved-dots" id="solved-dots"></div>
+    <div class="q-controls" style="margin-top:1.1rem">
+      <button class="btn" id="prev-btn">← Prev</button>
+      <button class="btn btn-primary" id="next-btn">Next →</button>
+      <button class="btn btn-random" id="rand-btn">🎲 Random</button>
+      <button class="btn btn-success" id="done-btn">✓ Mark Done</button>
+      <span class="toast" id="done-toast">✓ Saved!</span>
+    </div>
+    <div class="footer">Created by <strong>Umakant Kautkar</strong> · SYBCS C</div>
+  </div>
+
+</div>
+
+<!-- ==================== PROFILE OVERLAY ==================== -->
+<div id="overlay" class="overlay" style="display:none" onclick="closeProfileOnBg(event)">
+  <div class="profile-panel" id="profile-panel">
+    <div class="pp-head">
+      <h2>Your Profile</h2>
+      <button class="close-btn" id="close-profile">✕</button>
+    </div>
+    <div class="pp-body">
+      <div class="avatar-row">
+        <div class="avatar" id="pp-avatar">U</div>
+        <div class="avatar-info">
+          <div class="av-name" id="pp-name">—</div>
+          <div class="av-email" id="pp-email">—</div>
+        </div>
+      </div>
+      <div class="pp-stats">
+        <div class="pp-stat">
+          <div class="pp-stat-num" id="pp-total">0</div>
+          <div class="pp-stat-lbl">Questions done</div>
+        </div>
+        <div class="pp-stat">
+          <div class="pp-stat-num" id="pp-subjects">0</div>
+          <div class="pp-stat-lbl">Subjects tried</div>
+        </div>
+      </div>
+      <div class="pp-section-title">By subject</div>
+      <div class="subj-breakdown" id="pp-breakdown"></div>
+      <div class="pp-section-title">Recent activity</div>
+      <div id="pp-progress"></div>
+      <button class="logout-btn" id="logout-btn">Log out</button>
+    </div>
+  </div>
+</div>
+<script src="qbank.js"></script>
+</body>
+</html>

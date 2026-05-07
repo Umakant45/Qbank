@@ -1,0 +1,112 @@
+[
+  {
+    "title": "What are semantic HTML elements?",
+    "content": "Explain semantic HTML elements like header, nav, main, section, article, and footer. Why are they important?",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Difference between block and inline elements",
+    "content": "What's the difference between block-level and inline elements in HTML? Provide examples of each.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "What are HTML forms?",
+    "content": "Explain HTML forms and different input types. How do you validate form data?",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What is the DOCTYPE declaration?",
+    "content": "What is the DOCTYPE declaration in HTML? Why is it important and what happens if you omit it?",
+    "difficulty": "easy"
+  },
+  {
+    "title": "HTML5 new features",
+    "content": "What are the new features introduced in HTML5? Discuss canvas, video, audio, and local storage.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What is HTML?",
+    "content": "HTML (HyperText Markup Language) is the standard language used to create and structure content on the web.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "What are HTML tags?",
+    "content": "Tags are keywords enclosed in angle brackets that define the structure and elements of a web page, such as p, h1, div.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Difference between div and span",
+    "content": "div is a block-level element used for grouping content, while span is an inline element used for styling small text portions.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "HTML code: hyperlink to example.com",
+    "content": "Add a clickable link with text 'Visit Example' that redirects to https://example.com.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "HTML code: insert an image",
+    "content": "Insert an image named 'photo.jpg' with alternative text 'My Photo'.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Purpose of DOCTYPE html",
+    "content": "It declares the document type and version of HTML to the browser, ensuring correct rendering.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "HTML code: ordered and unordered list",
+    "content": "Create one ordered list with numbers and one unordered list with bullets containing at least 3 items each.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Absolute vs relative URLs in HTML",
+    "content": "Absolute URLs specify the full path (http://example.com/page), while relative URLs specify location relative to the current page.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "HTML code: table with 3 rows and 3 columns",
+    "content": "Design a table containing student names and marks in 3 subjects.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Difference between id and class attributes",
+    "content": "id is unique and identifies a single element, while class can be used for multiple elements for styling or scripting.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "HTML code: login form",
+    "content": "Create a login form containing username, password fields, and a submit button.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Use of meta tag in HTML",
+    "content": "meta provides metadata about the HTML document like character encoding, author, viewport settings, and SEO keywords.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "HTML code: embed a video",
+    "content": "Embed a video file named 'movie.mp4' that has controls to play/pause.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "HTML code: navigation links",
+    "content": "Create a navigation bar with links: Home, About, Contact.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "What are HTML attributes?",
+    "content": "Attributes provide additional information about elements, e.g., href in a, src in img, style in p.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "HTML code: add an audio file",
+    "content": "Embed an audio file named 'song.mp3' with controls enabled.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "b/strong vs i/em",
+    "content": "b and i are for styling bold/italic text, while strong and em indicate importance or emphasis semantically.",
+    "difficulty": "medium"
+  }
+]

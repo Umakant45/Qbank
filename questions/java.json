@@ -1,0 +1,207 @@
+[
+  {
+    "title": "Difference between == and equals() in Java",
+    "content": "Explain the difference between the == operator and the equals() method in Java. When should each be used?",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Explain Java Collections Framework",
+    "content": "Describe the Java Collections Framework. What are the main interfaces and their implementations?",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Method overloading vs overriding",
+    "content": "Explain the concepts of method overloading and method overriding in Java with examples.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Explain Java Memory Management",
+    "content": "How does garbage collection work in Java? Explain the different types of garbage collectors.",
+    "difficulty": "hard"
+  },
+  {
+    "title": "What are Java Streams?",
+    "content": "Explain Java 8 Streams API. Provide examples of common stream operations like map, filter, and reduce.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What is Java?",
+    "content": "Explain the key features of Java. Why is it called platform-independent and secure?",
+    "difficulty": "easy"
+  },
+  {
+    "title": "JDK, JRE, and JVM",
+    "content": "Explain the role of JDK, JRE, and JVM in Java development and execution.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Program: check if a number is prime",
+    "content": "Write a Java program to check whether a number is prime or not.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "OOP concepts in Java",
+    "content": "List and explain the four pillars of OOP: Encapsulation, Inheritance, Polymorphism, Abstraction.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Swap two numbers without third variable",
+    "content": "Write a Java program to swap two numbers without using a third variable.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "What is an interface in Java?",
+    "content": "Explain the concept of interfaces in Java. How do they differ from abstract classes?",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What are exceptions in Java?",
+    "content": "Explain checked vs unchecked exceptions with examples.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Explain Multithreading in Java",
+    "content": "What is a thread? How do you create threads using Thread class and Runnable interface?",
+    "difficulty": "hard"
+  },
+  {
+    "title": "What is JDBC?",
+    "content": "Explain Java Database Connectivity steps: Driver loading, Connection, Statement, ResultSet, Close.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Explain Serialization in Java",
+    "content": "What is serialization? How is Serializable interface used in Java?",
+    "difficulty": "medium"
+  },
+  {
+    "title": "What are wrapper classes in Java?",
+    "content": "Explain wrapper classes in Java. Why are they used?",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Abstract class vs interface",
+    "content": "What are the key differences between abstract classes and interfaces in Java?",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Program: reverse a string",
+    "content": "Write a Java program to reverse a given string without using built-in functions.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Program: check palindrome",
+    "content": "Write a Java program to check whether a string or number is a palindrome.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Program: factorial using recursion",
+    "content": "Write a Java program to calculate factorial of a number using recursion.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Program: check Armstrong number",
+    "content": "Write a Java program to check whether a number is an Armstrong number.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Program: sort an array",
+    "content": "Write a Java program to sort an array in ascending order.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Program: Fibonacci series",
+    "content": "Write a Java program to generate the Fibonacci series up to n terms.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Program: binary search",
+    "content": "Write a Java program to perform binary search on a sorted array.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Program: bubble sort",
+    "content": "Write a Java program to implement bubble sort algorithm.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Comments in Java",
+    "content": "Explain different types of comments used in Java with examples.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Data Types in Java",
+    "content": "List all primitive data types in Java and give an example of each.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "If-Else Statement",
+    "content": "Write a Java program that checks whether a number is positive, negative, or zero.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Arrays in Java",
+    "content": "Write Java code to store and print 5 student names using an array.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Methods in Java",
+    "content": "Write a Java program with a method that adds two numbers and returns the sum.",
+    "difficulty": "easy"
+  },
+  {
+    "title": "Constructor Example",
+    "content": "Write a Java program to demonstrate a parameterized constructor.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Encapsulation",
+    "content": "Write a Java class that uses private variables and public getter/setter methods.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Inheritance",
+    "content": "Write a Java program that demonstrates single inheritance using classes A and B.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Abstraction",
+    "content": "Write an abstract class 'Animal' with an abstract method 'sound()' and implement it in subclasses.",
+    "difficulty": "hard"
+  },
+  {
+    "title": "Polymorphism",
+    "content": "What is polymorphism in Java? Explain compile-time and runtime polymorphism.",
+    "difficulty": "hard"
+  },
+  {
+    "title": "Exception Handling",
+    "content": "Write Java code to handle an ArithmeticException using try-catch block.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "ArrayList Example",
+    "content": "Write Java code to create an ArrayList of integers and print all elements.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "HashMap Example",
+    "content": "Write a Java program to store student names and marks using HashMap.",
+    "difficulty": "medium"
+  },
+  {
+    "title": "Thread Example",
+    "content": "Write a Java program to create a thread by extending the Thread class.",
+    "difficulty": "hard"
+  },
+  {
+    "title": "Lambda Expressions",
+    "content": "Explain lambda expressions introduced in Java 8 with an example.",
+    "difficulty": "hard"
+  },
+  {
+    "title": "Streams API",
+    "content": "Write Java code to filter even numbers from a list using Stream API.",
+    "difficulty": "hard"
+  }
+]
