@@ -21,20 +21,33 @@
       <p>Training &amp; Placement Portal · SYBCS C</p>
     </div>
     <div class="login-card fade-up-1">
-      <h2>Welcome back 👋</h2>
-      <p class="sub">Enter your details to start practising interview &amp; exam questions</p>
-      <div class="lfield">
-        <label>Your Name</label>
-        <input type="text" id="inp-name" placeholder="e.g. Umakant Kautkar" autocomplete="name">
-      </div>
-      <div class="lfield">
-  <label>Email Address</label>
-  <input type="email" id="inp-email" placeholder="e.g. uma@college.edu" autocomplete="email">
-</div>
+  <h2>Welcome back 👋</h2>
+  <p class="sub">Enter your details to start practising interview & exam questions</p>
 
-<button class="btn-login" id="login-btn" type="button" onclick="startQBank()">
-  Get Started →
-</button>>
+  <div class="lfield">
+    <label>Your Name</label>
+    <input
+      type="text"
+      id="inp-name"
+      placeholder="e.g. Umakant Kautkar"
+      autocomplete="name"
+    >
+  </div>
+
+  <div class="lfield">
+    <label>Email Address</label>
+    <input
+      type="email"
+      id="inp-email"
+      placeholder="e.g. uma@college.edu"
+      autocomplete="email"
+    >
+  </div>
+
+  <button class="btn-login" id="login-btn" type="button">
+    Get Started →
+  </button>
+</div>
     <div class="login-stats fade-up-2">
       <div class="lstat">
         <div class="lstat-num">8</div>
@@ -157,70 +170,7 @@
 </div>
 
 <script src="qbank.js"></script>
-<script>
-function startQBank() {
 
-    const nameInput = document.getElementById("inp-name");
-    const emailInput = document.getElementById("inp-email");
-
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-
-    if (!name) {
-        alert("Please enter your name.");
-        nameInput.focus();
-        return;
-    }
-
-    if (!email || !email.includes("@")) {
-        alert("Please enter a valid email.");
-        emailInput.focus();
-        return;
-    }
-
-    // Save user
-    state.user = {
-        id: email.toLowerCase(),
-        name: name,
-        email: email
-    };
-
-    // Load previous progress
-    const userData = loadUserData(state.user.id);
-
-    state.progress = userData.progress;
-    state.solvedSet = userData.solvedSet;
-
-    // Hide login
-    document.getElementById("page-login").classList.remove("active");
-
-    // Show main page
-    document.getElementById("page-main").classList.add("active");
-
-    // Show subjects
-    showSubjectsView();
-
-    // Update greeting
-    const topbar = document.getElementById("topbar-center");
-
-    if (topbar) {
-        topbar.textContent =
-            "Hey, " + name.split(/\s+/)[0] + " 👋";
-    }
-
-    // Update profile initials
-    const profile = document.getElementById("profile-btn");
-
-    if (profile) {
-        profile.textContent = getInitials(name);
-    }
-
-    // Build subject cards
-    buildSubjectsGrid();
-
-    console.log("QBank opened successfully");
-}
-</script>
 </body>
 </html>
 

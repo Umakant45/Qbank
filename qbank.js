@@ -1,4 +1,3 @@
-
 // ============================================================
 // QBANK - QUESTION BANK
 // ============================================================
@@ -71,60 +70,65 @@ let state = {
 
 
 // ============================================================
-// LOAD ALL QUESTIONS
+// INITIALIZE
+// ============================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  setupLogin();
+
+  setupQuestionControls();
+
+  setupProfile();
+
+  loadQuestions();
+
+});
+
+
+// ============================================================
+// LOAD QUESTIONS
 // ============================================================
 
 async function loadQuestions() {
 
-  const subjects =
-    SUBJECTS_META.map(s => s.id);
-
-  try {
-
-    for (const subject of subjects) {
-
-      const response =
-        await fetch(`questions/${subject}.json`);
-
-      if (!response.ok) {
-        throw new Error(
-          `Failed to load questions/${subject}.json`
-        );
-      }
-
-      QUESTION_BANK[subject] =
-        await response.json();
-    }
-
-    initAfterQuestionsLoad();
-
-  } catch (error) {
-
-    console.error(
-      'Question loading error:',
-      error
-    );
-
-    alert(
-      'Unable to load questions. Please refresh the page.'
-    );
-  }
-}
-
-
-// ============================================================
-// AFTER QUESTIONS LOAD
-// ============================================================
-
-function initAfterQuestionsLoad() {
-
   let total = 0;
 
-  for (const subject in QUESTION_BANK) {
+  for (const subject of SUBJECTS_META) {
 
-    total +=
-      QUESTION_BANK[subject].length;
+    try {
+
+      const response = await fetch(
+        `questions/${subject.id}.json`
+      );
+
+      if (!response.ok) {
+        console.warn(
+          `Could not load questions/${subject.id}.json`
+        );
+
+        QUESTION_BANK[subject.id] = [];
+        continue;
+      }
+
+      const data = await response.json();
+
+      QUESTION_BANK[subject.id] =
+        Array.isArray(data) ? data : [];
+
+      total += QUESTION_BANK[subject.id].length;
+
+    } catch (error) {
+
+      console.warn(
+        `Error loading ${subject.id}.json`,
+        error
+      );
+
+      QUESTION_BANK[subject.id] = [];
+    }
   }
+
 
   const totalElement =
     document.getElementById('total-q-count');
@@ -133,13 +137,194 @@ function initAfterQuestionsLoad() {
     totalElement.textContent = total;
   }
 
-  // Always start at QBank login page.
-  showPage('page-login');
+});
+
+
+// ============================================================
+// LOGIN
+// ============================================================
+
+function setupLogin() {
+
+  const loginButton =
+    document.getElementById('login-btn');
+
+  const nameInput =
+    document.getElementById('inp-name');
+
+  const emailInput =
+    document.getElementById('inp-email');
+
+
+  if (!loginButton || !nameInput || !emailInput) {
+
+    console.error('Login elements not found.');
+
+    return;
+  }
+
+
+  loginButton.addEventListener('click', loginUser);
+
+
+  // Allow Enter key
+  nameInput.addEventListener('keydown', event => {
+
+    if (event.key === 'Enter') {
+      loginUser();
+    }
+
+  });
+
+
+  emailInput.addEventListener('keydown', event => {
+
+    if (event.key === 'Enter') {
+      loginUser();
+    }
+
+  });
+
 }
 
 
+// ============================================================
+// LOGIN USER
+// ============================================================
+
+function loginUser() {
+
+  const nameInput =
+    document.getElementById('inp-name');
+
+  const emailInput =
+    document.getElementById('inp-email');
 
 
+  const name =
+    nameInput.value.trim();
+
+  const email =
+    emailInput.value.trim();
+
+
+  if (!name) {
+
+    alert('Please enter your name.');
+
+    nameInput.focus();
+
+    return;
+  }
+
+
+  if (!email) {
+
+    alert('Please enter your email.');
+
+    emailInput.focus();
+
+    return;
+  }
+
+
+  if (!email.includes('@')) {
+
+    alert('Please enter a valid email.');
+
+    emailInput.focus();
+
+    return;
+  }
+
+
+  // Create user
+
+  state.user = {
+
+    id: email.toLowerCase(),
+
+    name: name,
+
+    email: email
+
+  };
+
+
+  // Save login information
+
+  localStorage.setItem(
+    'qbank_name',
+    name
+  );
+
+  localStorage.setItem(
+    'qbank_email',
+    email
+  );
+
+
+  // Load previous progress
+
+  const userData =
+    loadUserData(state.user.id);
+
+
+  state.progress =
+    userData.progress;
+
+  state.solvedSet =
+    userData.solvedSet;
+
+
+  // Update topbar
+
+  const firstName =
+    name.split(/\s+/)[0];
+
+
+  const topbar =
+    document.getElementById(
+      'topbar-center'
+    );
+
+
+  if (topbar) {
+
+    topbar.textContent =
+      `Hey, ${firstName} 👋`;
+
+  }
+
+
+  // Update profile button
+
+  const profileButton =
+    document.getElementById(
+      'profile-btn'
+    );
+
+
+  if (profileButton) {
+
+    profileButton.textContent =
+      getInitials(name);
+
+  }
+
+
+  // IMPORTANT:
+  // Show main page
+
+  showPage('page-main');
+
+
+  // IMPORTANT:
+  // Show subjects
+
+  showSubjectsView();
+
+}
 
 
 // ============================================================
@@ -155,6 +340,7 @@ function getInitials(name) {
     .join('')
     .toUpperCase()
     .slice(0, 2) || '?';
+
 }
 
 
@@ -168,23 +354,29 @@ function saveState() {
     return;
   }
 
+
   const solved = {};
+
 
   for (const subject in state.solvedSet) {
 
     solved[subject] =
       [...state.solvedSet[subject]];
+
   }
+
 
   localStorage.setItem(
     'qb_solved_' + state.user.id,
     JSON.stringify(solved)
   );
 
+
   localStorage.setItem(
     'qb_progress_' + state.user.id,
     JSON.stringify(state.progress)
   );
+
 }
 
 
@@ -199,34 +391,65 @@ function loadUserData(userId) {
       'qb_solved_' + userId
     );
 
+
   const rawProgress =
     localStorage.getItem(
       'qb_progress_' + userId
     );
 
-  const solvedData =
-    rawSolved
-      ? JSON.parse(rawSolved)
-      : {};
+
+  let solvedData = {};
+
+  let progress = [];
+
+
+  try {
+
+    solvedData =
+      rawSolved
+        ? JSON.parse(rawSolved)
+        : {};
+
+  } catch {
+
+    solvedData = {};
+
+  }
+
+
+  try {
+
+    progress =
+      rawProgress
+        ? JSON.parse(rawProgress)
+        : [];
+
+  } catch {
+
+    progress = [];
+
+  }
+
 
   const solvedSet = {};
+
 
   for (const subject in solvedData) {
 
     solvedSet[subject] =
       new Set(solvedData[subject]);
+
   }
+
 
   return {
 
-    progress:
-      rawProgress
-        ? JSON.parse(rawProgress)
-        : [],
+    progress,
 
     solvedSet
 
   };
+
 }
 
 
@@ -244,8 +467,10 @@ function showPage(id) {
 
     });
 
+
   const page =
     document.getElementById(id);
+
 
   if (page) {
 
@@ -256,69 +481,9 @@ function showPage(id) {
     console.error(
       `Page "${id}" was not found.`
     );
-  }
-}
 
-
-// ============================================================
-// LOGIN
-// ============================================================
-
-
-
-
-
-
-
-
-
-// ============================================================
-// DO LOGIN
-// ============================================================
-
-
-
-
-// ============================================================
-// INIT MAIN DASHBOARD
-// ============================================================
-
-function initMain() {
-
-  const firstName =
-    state.user.name
-      .split(' ')[0];
-
-
-  const topbar =
-    document.getElementById(
-      'topbar-center'
-    );
-
-  if (topbar) {
-
-    topbar.textContent =
-      `Hey, ${firstName} 👋`;
   }
 
-
-  const profileButton =
-    document.getElementById(
-      'profile-btn'
-    );
-
-  if (profileButton) {
-
-    profileButton.textContent =
-      getInitials(
-        state.user.name
-      );
-  }
-
-
-  buildSubjectsGrid();
-
-  showSubjectsView();
 }
 
 
@@ -333,6 +498,7 @@ function buildSubjectsGrid() {
       'subjects-grid'
     );
 
+
   if (!grid) {
 
     console.error(
@@ -343,86 +509,86 @@ function buildSubjectsGrid() {
   }
 
 
-  grid.innerHTML =
-    SUBJECTS_META.map(subject => {
-
-      const questions =
-        QUESTION_BANK[subject.id] || [];
+  grid.innerHTML = '';
 
 
-      const done =
-        state.solvedSet[subject.id]
-          ? state.solvedSet[subject.id].size
-          : 0;
+  SUBJECTS_META.forEach(subject => {
+
+    const questions =
+      QUESTION_BANK[subject.id] || [];
 
 
-      return `
-
-        <div
-          class="subject-card"
-          data-subj="${subject.id}"
-        >
-
-          <span class="sc-icon">
-            ${subject.icon}
-          </span>
-
-          <div class="sc-title">
-            ${subject.label}
-          </div>
-
-          <div class="sc-desc">
-            ${subject.desc}
-          </div>
-
-          <div class="sc-meta">
-
-            <span class="sc-count">
-
-              ${questions.length} questions
-
-              ${
-                done > 0
-                  ? ' · ' + done + ' done'
-                  : ''
-              }
-
-            </span>
-
-            <span class="sc-arrow">
-              →
-            </span>
-
-          </div>
-
-        </div>
-
-      `;
-
-    }).join('');
+    const done =
+      state.solvedSet[subject.id]
+        ? state.solvedSet[subject.id].size
+        : 0;
 
 
-  // Add click events
+    const card =
+      document.createElement('div');
 
-  grid
-    .querySelectorAll('.subject-card')
-    .forEach(card => {
 
-      card.addEventListener(
-        'click',
-        () => {
+    card.className =
+      'subject-card';
 
-          const subjectId =
-            card.getAttribute(
-              'data-subj'
-            );
 
-          loadSubject(subjectId);
+    card.setAttribute(
+      'data-subj',
+      subject.id
+    );
 
-        }
-      );
 
-    });
+    card.innerHTML = `
+
+      <span class="sc-icon">
+        ${subject.icon}
+      </span>
+
+      <div class="sc-title">
+        ${subject.label}
+      </div>
+
+      <div class="sc-desc">
+        ${subject.desc}
+      </div>
+
+      <div class="sc-meta">
+
+        <span class="sc-count">
+
+          ${questions.length} questions
+
+          ${
+            done > 0
+              ? ' · ' + done + ' done'
+              : ''
+          }
+
+        </span>
+
+        <span class="sc-arrow">
+          →
+        </span>
+
+      </div>
+
+    `;
+
+
+    card.addEventListener(
+      'click',
+      () => {
+
+        loadSubject(subject.id);
+
+      }
+    );
+
+
+    grid.appendChild(card);
+
+  });
+
 }
 
 
@@ -437,6 +603,7 @@ function showSubjectsView() {
       'view-subjects'
     );
 
+
   const questionsView =
     document.getElementById(
       'view-questions'
@@ -447,6 +614,7 @@ function showSubjectsView() {
 
     subjectsView.style.display =
       'block';
+
   }
 
 
@@ -454,10 +622,12 @@ function showSubjectsView() {
 
     questionsView.style.display =
       'none';
+
   }
 
 
   buildSubjectsGrid();
+
 }
 
 
@@ -477,7 +647,7 @@ function loadSubject(subjectId) {
   ) {
 
     alert(
-      'No questions available for this subject.'
+      `No questions found for ${subjectId}.`
     );
 
     return;
@@ -487,16 +657,16 @@ function loadSubject(subjectId) {
   state.subject =
     subjectId;
 
+
   state.qIndex =
     0;
 
 
-  if (
-    !state.solvedSet[subjectId]
-  ) {
+  if (!state.solvedSet[subjectId]) {
 
     state.solvedSet[subjectId] =
       new Set();
+
   }
 
 
@@ -517,6 +687,7 @@ function loadSubject(subjectId) {
 
     subjectName.textContent =
       `${meta.icon} ${meta.label}`;
+
   }
 
 
@@ -524,6 +695,7 @@ function loadSubject(subjectId) {
     document.getElementById(
       'view-subjects'
     );
+
 
   const questionsView =
     document.getElementById(
@@ -535,6 +707,7 @@ function loadSubject(subjectId) {
 
     subjectsView.style.display =
       'none';
+
   }
 
 
@@ -542,10 +715,12 @@ function loadSubject(subjectId) {
 
     questionsView.style.display =
       'block';
+
   }
 
 
   renderQuestion();
+
 }
 
 
@@ -598,35 +773,35 @@ function renderQuestion() {
     );
 
 
-  // -----------------------------
-  // Question counter
-  // -----------------------------
+  // Counter
 
   const counter =
     document.getElementById(
       'q-counter'
     );
 
+
   if (counter) {
 
     counter.textContent =
       `Q ${state.qIndex + 1} / ${total}`;
+
   }
 
 
-  // -----------------------------
-  // Statistics
-  // -----------------------------
+  // Stats
 
   const totalElement =
     document.getElementById(
       'st-total'
     );
 
+
   if (totalElement) {
 
     totalElement.textContent =
       total;
+
   }
 
 
@@ -635,10 +810,12 @@ function renderQuestion() {
       'st-done'
     );
 
+
   if (doneElement) {
 
     doneElement.textContent =
       done;
+
   }
 
 
@@ -647,26 +824,28 @@ function renderQuestion() {
       'st-cur'
     );
 
+
   if (currentElement) {
 
     currentElement.textContent =
       state.qIndex + 1;
+
   }
 
 
-  // -----------------------------
   // Progress
-  // -----------------------------
 
   const percentageElement =
     document.getElementById(
       'pbar-pct'
     );
 
+
   if (percentageElement) {
 
     percentageElement.textContent =
       percentage + '%';
+
   }
 
 
@@ -675,64 +854,64 @@ function renderQuestion() {
       'q-pbar-fill'
     );
 
+
   if (progressBar) {
 
     progressBar.style.width =
       percentage + '%';
+
   }
 
 
-  // -----------------------------
   // Question number
-  // -----------------------------
 
   const questionNumber =
     document.getElementById(
       'q-num-pill'
     );
 
+
   if (questionNumber) {
 
     questionNumber.textContent =
       `Q${state.qIndex + 1}`;
+
   }
 
 
-  // -----------------------------
-  // Question title
-  // -----------------------------
+  // Title
 
   const title =
     document.getElementById(
       'q-title'
     );
 
+
   if (title) {
 
     title.textContent =
-      question.title;
+      question.title || '';
+
   }
 
 
-  // -----------------------------
-  // Question content
-  // -----------------------------
+  // Content
 
   const content =
     document.getElementById(
       'q-content'
     );
 
+
   if (content) {
 
     content.innerHTML =
-      question.content;
+      question.content || '';
+
   }
 
 
-  // -----------------------------
   // Difficulty
-  // -----------------------------
 
   const difficulty =
     question.difficulty || 'easy';
@@ -749,14 +928,14 @@ function renderQuestion() {
     difficultyBadge.textContent =
       difficulty.toUpperCase();
 
+
     difficultyBadge.className =
       'diff-badge ' + difficulty;
+
   }
 
 
-  // -----------------------------
   // Solved dots
-  // -----------------------------
 
   const dots =
     document.getElementById(
@@ -767,33 +946,28 @@ function renderQuestion() {
   if (dots) {
 
     dots.innerHTML =
-      questions.map(
-        (_, index) => {
+      questions.map((_, index) => {
 
-          const solved =
-            state.solvedSet[state.subject]
-              ?.has(index);
+        const solved =
+          state.solvedSet[state.subject]
+            ?.has(index);
 
 
-          return `
+        return `
 
-            <div
-              class="sdot ${
-                solved ? 'done' : ''
-              }"
-              title="Q${index + 1}"
-            ></div>
+          <div
+            class="sdot ${solved ? 'done' : ''}"
+            title="Q${index + 1}"
+          ></div>
 
-          `;
+        `;
 
-        }
-      ).join('');
+      }).join('');
+
   }
 
 
-  // -----------------------------
-  // Previous button
-  // -----------------------------
+  // Previous
 
   const previousButton =
     document.getElementById(
@@ -805,12 +979,11 @@ function renderQuestion() {
 
     previousButton.disabled =
       state.qIndex === 0;
+
   }
 
 
-  // -----------------------------
-  // Next button
-  // -----------------------------
+  // Next
 
   const nextButton =
     document.getElementById(
@@ -822,12 +995,11 @@ function renderQuestion() {
 
     nextButton.disabled =
       state.qIndex === total - 1;
+
   }
 
 
-  // -----------------------------
-  // Done button
-  // -----------------------------
+  // Done
 
   const doneButton =
     document.getElementById(
@@ -849,12 +1021,11 @@ function renderQuestion() {
 
     doneButton.style.opacity =
       alreadyDone ? '.6' : '1';
+
   }
 
 
-  // -----------------------------
   // Animation
-  // -----------------------------
 
   const card =
     document.getElementById(
@@ -871,7 +1042,259 @@ function renderQuestion() {
 
     card.style.animation =
       'fadeUp .3s ease both';
+
   }
+
+}
+
+
+// ============================================================
+// QUESTION CONTROLS
+// ============================================================
+
+function setupQuestionControls() {
+
+  // BACK
+
+  const backButton =
+    document.getElementById(
+      'back-btn'
+    );
+
+
+  if (backButton) {
+
+    backButton.addEventListener(
+      'click',
+      () => {
+
+        showSubjectsView();
+
+      }
+    );
+
+  }
+
+
+  // PREVIOUS
+
+  const previousButton =
+    document.getElementById(
+      'prev-btn'
+    );
+
+
+  if (previousButton) {
+
+    previousButton.addEventListener(
+      'click',
+      () => {
+
+        if (state.qIndex > 0) {
+
+          state.qIndex--;
+
+          renderQuestion();
+
+        }
+
+      }
+    );
+
+  }
+
+
+  // NEXT
+
+  const nextButton =
+    document.getElementById(
+      'next-btn'
+    );
+
+
+  if (nextButton) {
+
+    nextButton.addEventListener(
+      'click',
+      () => {
+
+        const questions =
+          QUESTION_BANK[state.subject];
+
+
+        if (
+          questions &&
+          state.qIndex <
+            questions.length - 1
+        ) {
+
+          state.qIndex++;
+
+          renderQuestion();
+
+        }
+
+      }
+    );
+
+  }
+
+
+  // RANDOM
+
+  const randomButton =
+    document.getElementById(
+      'rand-btn'
+    );
+
+
+  if (randomButton) {
+
+    randomButton.addEventListener(
+      'click',
+      () => {
+
+        const questions =
+          QUESTION_BANK[state.subject];
+
+
+        if (
+          !questions ||
+          questions.length === 0
+        ) {
+
+          return;
+
+        }
+
+
+        let randomIndex;
+
+
+        do {
+
+          randomIndex =
+            Math.floor(
+              Math.random() *
+              questions.length
+            );
+
+        } while (
+          questions.length > 1 &&
+          randomIndex === state.qIndex
+        );
+
+
+        state.qIndex =
+          randomIndex;
+
+
+        renderQuestion();
+
+      }
+    );
+
+  }
+
+
+  // DONE
+
+  const doneButton =
+    document.getElementById(
+      'done-btn'
+    );
+
+
+  if (doneButton) {
+
+    doneButton.addEventListener(
+      'click',
+      markQuestionDone
+    );
+
+  }
+
+}
+
+
+// ============================================================
+// MARK QUESTION DONE
+// ============================================================
+
+function markQuestionDone() {
+
+  const questions =
+    QUESTION_BANK[state.subject];
+
+
+  if (
+    !questions ||
+    !questions[state.qIndex]
+  ) {
+
+    return;
+  }
+
+
+  if (!state.solvedSet[state.subject]) {
+
+    state.solvedSet[state.subject] =
+      new Set();
+
+  }
+
+
+  const alreadyDone =
+    state.solvedSet[state.subject]
+      .has(state.qIndex);
+
+
+  if (!alreadyDone) {
+
+    const question =
+      questions[state.qIndex];
+
+
+    state.solvedSet[state.subject]
+      .add(state.qIndex);
+
+
+    const now =
+      new Date();
+
+
+    state.progress.push({
+
+      title:
+        question.title || 'Untitled Question',
+
+      subject:
+        state.subject,
+
+      difficulty:
+        question.difficulty || 'easy',
+
+      date:
+        now.toLocaleDateString('en-IN'),
+
+      time:
+        now.toLocaleTimeString(
+          'en-IN',
+          {
+            hour: '2-digit',
+            minute: '2-digit'
+          }
+        )
+
+    });
+
+
+    saveState();
+
+  }
+
+
+  renderQuestion();
 
 
   const toast =
@@ -882,272 +1305,17 @@ function renderQuestion() {
 
   if (toast) {
 
-    toast.classList.remove(
-      'show'
-    );
+    toast.classList.add('show');
+
+
+    setTimeout(() => {
+
+      toast.classList.remove('show');
+
+    }, 2000);
+
   }
-}
 
-
-// ============================================================
-// QUESTION CONTROLS
-// ============================================================
-
-// BACK
-
-const backButton =
-  document.getElementById(
-    'back-btn'
-  );
-
-
-if (backButton) {
-
-  backButton.addEventListener(
-    'click',
-    () => {
-
-      showSubjectsView();
-
-    }
-  );
-}
-
-
-// PREVIOUS
-
-const previousButton =
-  document.getElementById(
-    'prev-btn'
-  );
-
-
-if (previousButton) {
-
-  previousButton.addEventListener(
-    'click',
-    () => {
-
-      if (state.qIndex > 0) {
-
-        state.qIndex--;
-
-        renderQuestion();
-      }
-
-    }
-  );
-}
-
-
-// NEXT
-
-const nextButton =
-  document.getElementById(
-    'next-btn'
-  );
-
-
-if (nextButton) {
-
-  nextButton.addEventListener(
-    'click',
-    () => {
-
-      const questions =
-        QUESTION_BANK[state.subject];
-
-
-      if (
-        questions &&
-        state.qIndex <
-          questions.length - 1
-      ) {
-
-        state.qIndex++;
-
-        renderQuestion();
-      }
-
-    }
-  );
-}
-
-
-// RANDOM
-
-const randomButton =
-  document.getElementById(
-    'rand-btn'
-  );
-
-
-if (randomButton) {
-
-  randomButton.addEventListener(
-    'click',
-    () => {
-
-      const questions =
-        QUESTION_BANK[state.subject];
-
-
-      if (
-        !questions ||
-        questions.length === 0
-      ) {
-
-        return;
-      }
-
-
-      let randomIndex;
-
-
-      do {
-
-        randomIndex =
-          Math.floor(
-            Math.random() *
-            questions.length
-          );
-
-      } while (
-        questions.length > 1 &&
-        randomIndex === state.qIndex
-      );
-
-
-      state.qIndex =
-        randomIndex;
-
-
-      renderQuestion();
-
-    }
-  );
-}
-
-
-// ============================================================
-// MARK QUESTION AS DONE
-// ============================================================
-
-const doneButton =
-  document.getElementById(
-    'done-btn'
-  );
-
-
-if (doneButton) {
-
-  doneButton.addEventListener(
-    'click',
-    () => {
-
-      const questions =
-        QUESTION_BANK[state.subject];
-
-
-      if (
-        !questions ||
-        !questions[state.qIndex]
-      ) {
-
-        return;
-      }
-
-
-      const question =
-        questions[state.qIndex];
-
-
-      if (
-        !state.solvedSet[state.subject]
-      ) {
-
-        state.solvedSet[state.subject] =
-          new Set();
-      }
-
-
-      // Only add once
-
-      const alreadyDone =
-        state.solvedSet[state.subject]
-          .has(state.qIndex);
-
-
-      if (!alreadyDone) {
-
-        state.solvedSet[state.subject]
-          .add(state.qIndex);
-
-
-        state.progress.push({
-
-          title:
-            question.title,
-
-          subject:
-            state.subject,
-
-          difficulty:
-            question.difficulty || 'easy',
-
-          date:
-            new Date()
-              .toLocaleDateString(
-                'en-IN'
-              ),
-
-          time:
-            new Date()
-              .toLocaleTimeString(
-                'en-IN',
-                {
-                  hour: '2-digit',
-                  minute: '2-digit'
-                }
-              )
-
-        });
-
-
-        saveState();
-      }
-
-
-      renderQuestion();
-
-
-      const toast =
-        document.getElementById(
-          'done-toast'
-        );
-
-
-      if (toast) {
-
-        toast.classList.add(
-          'show'
-        );
-
-
-        setTimeout(
-          () => {
-
-            toast.classList.remove(
-              'show'
-            );
-
-          },
-          2000
-        );
-      }
-
-    }
-  );
 }
 
 
@@ -1155,101 +1323,55 @@ if (doneButton) {
 // PROFILE
 // ============================================================
 
-const profileButton =
-  document.getElementById(
-    'profile-btn'
-  );
+function setupProfile() {
+
+  const profileButton =
+    document.getElementById(
+      'profile-btn'
+    );
 
 
-if (profileButton) {
+  if (profileButton) {
 
-  profileButton.addEventListener(
-    'click',
-    openProfile
-  );
-}
+    profileButton.addEventListener(
+      'click',
+      openProfile
+    );
 
-
-const closeProfileButton =
-  document.getElementById(
-    'close-profile'
-  );
+  }
 
 
-if (closeProfileButton) {
-
-  closeProfileButton.addEventListener(
-    'click',
-    closeProfile
-  );
-}
+  const closeButton =
+    document.getElementById(
+      'close-profile'
+    );
 
 
-// ============================================================
-// LOGOUT
-// ============================================================
+  if (closeButton) {
 
-const logoutButton =
-  document.getElementById(
-    'logout-btn'
-  );
+    closeButton.addEventListener(
+      'click',
+      closeProfile
+    );
 
-
-if (logoutButton) {
-
-  logoutButton.addEventListener(
-    'click',
-    () => {
-
-      // Clear current session only
-
-      state.user = null;
-
-      state.subject = null;
-
-      state.qIndex = 0;
-
-      state.progress = [];
-
-      state.solvedSet = {};
+  }
 
 
-      closeProfile();
+  const logoutButton =
+    document.getElementById(
+      'logout-btn'
+    );
 
 
-      // Return to QBank login
+  if (logoutButton) {
 
-      showPage(
-        'page-login'
-      );
+    logoutButton.addEventListener(
+      'click',
+      logout
+    );
 
+  }
 
-      // Clear login fields
-
-      const nameInput =
-        document.getElementById(
-          'inp-name'
-        );
-
-      const emailInput =
-        document.getElementById(
-          'inp-email'
-        );
-
-
-      if (nameInput) {
-
-        nameInput.value = '';
-      }
-
-
-      if (emailInput) {
-
-        emailInput.value = '';
-      }
-
-    }
-  );
 }
 
 
@@ -1268,10 +1390,6 @@ function openProfile() {
     state.user;
 
 
-  // -----------------------------
-  // Avatar
-  // -----------------------------
-
   const avatar =
     document.getElementById(
       'pp-avatar'
@@ -1282,12 +1400,9 @@ function openProfile() {
 
     avatar.textContent =
       getInitials(user.name);
+
   }
 
-
-  // -----------------------------
-  // Name
-  // -----------------------------
 
   const name =
     document.getElementById(
@@ -1299,12 +1414,9 @@ function openProfile() {
 
     name.textContent =
       user.name;
+
   }
 
-
-  // -----------------------------
-  // Email
-  // -----------------------------
 
   const email =
     document.getElementById(
@@ -1316,15 +1428,8 @@ function openProfile() {
 
     email.textContent =
       user.email;
+
   }
-
-
-  // -----------------------------
-  // Total completed
-  // -----------------------------
-
-  const totalDone =
-    state.progress.length;
 
 
   const totalElement =
@@ -1336,21 +1441,9 @@ function openProfile() {
   if (totalElement) {
 
     totalElement.textContent =
-      totalDone;
+      state.progress.length;
+
   }
-
-
-  // -----------------------------
-  // Subjects attempted
-  // -----------------------------
-
-  const subjectsDone =
-    Object.keys(
-      state.solvedSet
-    ).filter(
-      subject =>
-        state.solvedSet[subject].size > 0
-    ).length;
 
 
   const subjectsElement =
@@ -1359,16 +1452,23 @@ function openProfile() {
     );
 
 
+  const subjectsDone =
+    Object.keys(state.solvedSet)
+      .filter(subject =>
+        state.solvedSet[subject].size > 0
+      )
+      .length;
+
+
   if (subjectsElement) {
 
     subjectsElement.textContent =
       subjectsDone;
+
   }
 
 
-  // -----------------------------
   // Subject breakdown
-  // -----------------------------
 
   const breakdown =
     document.getElementById(
@@ -1379,8 +1479,8 @@ function openProfile() {
   if (breakdown) {
 
     const rows =
-      SUBJECTS_META.map(
-        subject => {
+      SUBJECTS_META
+        .map(subject => {
 
           const count =
             state.solvedSet[subject.id]
@@ -1414,30 +1514,26 @@ function openProfile() {
 
           `;
 
-        }
-      )
-      .filter(Boolean)
-      .join('');
+        })
+        .filter(Boolean)
+        .join('');
 
 
     breakdown.innerHTML =
       rows ||
       `
-        <p
-          style="
-            font-size:.78rem;
-            color:var(--tx3)
-          "
-        >
+        <p style="
+          font-size:.78rem;
+          color:var(--tx3)
+        ">
           No subjects attempted yet
         </p>
       `;
+
   }
 
 
-  // -----------------------------
   // Recent progress
-  // -----------------------------
 
   const progressElement =
     document.getElementById(
@@ -1445,42 +1541,38 @@ function openProfile() {
     );
 
 
-  if (!progressElement) {
-    return;
-  }
+  if (progressElement) {
+
+    const recent =
+      [...state.progress]
+        .reverse()
+        .slice(0, 20);
 
 
-  const recent =
-    [...state.progress]
-      .reverse()
-      .slice(0, 20);
+    if (recent.length === 0) {
 
+      progressElement.innerHTML = `
 
-  if (recent.length === 0) {
+        <div class="prog-empty">
 
-    progressElement.innerHTML = `
+          <span class="pe-icon">
+            📭
+          </span>
 
-      <div class="prog-empty">
+          No questions marked done yet.
 
-        <span class="pe-icon">
-          📭
-        </span>
+          <br>
 
-        No questions marked done yet.
+          Start practising!
 
-        <br>
+        </div>
 
-        Start practising!
+      `;
 
-      </div>
+    } else {
 
-    `;
-
-  } else {
-
-    progressElement.innerHTML =
-      recent.map(
-        item => {
+      progressElement.innerHTML =
+        recent.map(item => {
 
           const meta =
             SUBJECTS_META.find(
@@ -1496,36 +1588,22 @@ function openProfile() {
             <div class="prog-item">
 
               <div class="prog-icon">
-
                 ${meta.icon}
-
               </div>
-
 
               <div class="prog-info">
 
                 <div class="pi-title">
-
                   ${item.title}
-
                 </div>
-
 
                 <div class="pi-meta">
 
-                  ${
-                    (item.subject || '')
-                      .toUpperCase()
-                  }
-
+                  ${(item.subject || '').toUpperCase()}
                   ·
-
                   ${item.difficulty}
-
                   ·
-
                   ${item.date}
-
                   ${item.time}
 
                 </div>
@@ -1536,14 +1614,12 @@ function openProfile() {
 
           `;
 
-        }
-      ).join('');
+        }).join('');
+
+    }
+
   }
 
-
-  // -----------------------------
-  // Open profile overlay
-  // -----------------------------
 
   const overlay =
     document.getElementById(
@@ -1555,7 +1631,9 @@ function openProfile() {
 
     overlay.style.display =
       'flex';
+
   }
+
 }
 
 
@@ -1575,12 +1653,14 @@ function closeProfile() {
 
     overlay.style.display =
       'none';
+
   }
+
 }
 
 
 // ============================================================
-// CLOSE PROFILE WHEN CLICKING BACKGROUND
+// CLOSE PROFILE BACKGROUND
 // ============================================================
 
 function closeProfileOnBg(event) {
@@ -1591,8 +1671,68 @@ function closeProfileOnBg(event) {
   ) {
 
     closeProfile();
+
   }
+
 }
-document.addEventListener("DOMContentLoaded", function () {
-    loadQuestions();
-});
+
+
+// ============================================================
+// LOGOUT
+// ============================================================
+
+function logout() {
+
+  state.user = null;
+
+  state.subject = null;
+
+  state.qIndex = 0;
+
+  state.progress = [];
+
+  state.solvedSet = {};
+
+
+  closeProfile();
+
+
+  const nameInput =
+    document.getElementById(
+      'inp-name'
+    );
+
+
+  const emailInput =
+    document.getElementById(
+      'inp-email'
+    );
+
+
+  if (nameInput) {
+
+    nameInput.value = '';
+
+  }
+
+
+  if (emailInput) {
+
+    emailInput.value = '';
+
+  }
+
+
+  showPage('page-login');
+
+}
+
+
+// ============================================================
+// AUTO RESTORE LOGIN? NO
+// ============================================================
+//
+// We deliberately do NOT auto-login.
+// QBank starts at the login page every time.
+//
+// ============================================================
