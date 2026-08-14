@@ -1,0 +1,7 @@
+const SUPABASE_URL = "YOUR_NOTESPHERE_SUPABASE_URL";
+const SUPABASE_ANON_KEY = "YOUR_NOTESPHERE_SUPABASE_ANON_KEY";
+
+const noteSphereSupabase = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_ANON_KEY
+);

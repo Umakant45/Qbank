@@ -40,7 +40,30 @@ async function loadQuestions() {
   }
 
   initAfterQuestionsLoad();
+  checkNoteSphereLogin();
 }
+// ============================================================
+// LOAD ALL QUESTIONS
+// ============================================================
+
+async function loadQuestions() {
+
+  const subjects = SUBJECTS_META.map(s => s.id);
+
+  for (const subject of subjects) {
+
+    const response =
+      await fetch(`questions/${subject}.json`);
+
+    QUESTION_BANK[subject] =
+      await response.json();
+  }
+
+  initAfterQuestionsLoad();
+
+  checkNoteSphereLogin();
+}
+
 
 // ============================================================
 // AFTER QUESTIONS LOAD
@@ -48,39 +71,24 @@ async function loadQuestions() {
 
 function initAfterQuestionsLoad() {
 
-  // TOTAL QUESTION COUNT
   let total = 0;
 
   for (const k in QUESTION_BANK) {
     total += QUESTION_BANK[k].length;
   }
 
-  document.getElementById('total-q-count').textContent = total;
+  document.getElementById('total-q-count')
+    .textContent = total;
 
-  // AUTO LOGIN
-  const saved = localStorage.getItem('qb_user');
-
-  if (saved) {
-    try {
-      state.user = JSON.parse(saved);
-
-      const d = loadUserData(state.user.email);
-
-      state.progress = d.progress;
-      state.solvedSet = d.solvedSet;
-
-      initMain();
-
-      showPage('page-main');
-
-    } catch (e) {
-      localStorage.removeItem('qb_user');
-    }
-  }
+  // QBank does NOT use its own automatic login.
+  // Authentication comes from NoteSphere.
+  showPage('page-login');
 }
+
 
 // Start loading
 loadQuestions();
+
 
 // ============================================================
 // HELPERS
@@ -97,9 +105,8 @@ function getInitials(name){
 }
 
 function saveState(){
-  if(!state.user) return;
 
-  localStorage.setItem('qb_user', JSON.stringify(state.user));
+  if(!state.user) return;
 
   const ss = {};
 
@@ -108,23 +115,23 @@ function saveState(){
   }
 
   localStorage.setItem(
-    'qb_solved_' + state.user.email,
+    'qb_solved_' + state.user.id,
     JSON.stringify(ss)
   );
 
   localStorage.setItem(
-    'qb_progress_' + state.user.email,
+    'qb_progress_' + state.user.id,
     JSON.stringify(state.progress)
   );
 }
 
-function loadUserData(email){
+function loadUserData(userId){
 
   const rawSolved =
-    localStorage.getItem('qb_solved_' + email);
+    localStorage.getItem('qb_solved_' + userId);
 
   const rawProg =
-    localStorage.getItem('qb_progress_' + email);
+    localStorage.getItem('qb_progress_' + userId);
 
   const ss = rawSolved
     ? JSON.parse(rawSolved)
@@ -163,54 +170,68 @@ function showPage(id){
 // LOGIN
 // ============================================================
 
-document
-  .getElementById('login-btn')
-  .addEventListener('click', doLogin);
 
-document
-  .getElementById('inp-email')
-  .addEventListener('keydown', e => {
-    if(e.key === 'Enter') doLogin();
-  });
 
-document
-  .getElementById('inp-name')
-  .addEventListener('keydown', e => {
-    if(e.key === 'Enter'){
-      document
-        .getElementById('inp-email')
-        .focus();
-    }
-  });
+async function checkNoteSphereLogin() {
 
-function doLogin(){
-
-  const name =
-    document.getElementById('inp-name')
-    .value.trim();
-
-  const email =
-    document.getElementById('inp-email')
-    .value.trim();
-
-  if(!name){
-    document.getElementById('inp-name').focus();
+  if (!noteSphereSupabase) {
+    console.error("Supabase is not configured.");
     return;
   }
 
-  if(!email || !email.includes('@')){
-    document.getElementById('inp-email').focus();
+  const { data, error } =
+    await noteSphereSupabase.auth.getSession();
+
+  if (error) {
+    console.error("Session error:", error);
+    showPage('page-login');
     return;
   }
 
-  state.user = {name, email};
+  const session = data?.session;
 
-  const d = loadUserData(email);
+  if (!session) {
+    showPage('page-login');
+    return;
+  }
+
+  const { data: profile, error: profileError } =
+    await noteSphereSupabase
+      .from("profiles")
+      .select("student_id, full_name, role, status")
+      .eq("id", session.user.id)
+      .maybeSingle();
+
+  if (profileError || !profile) {
+    console.error("Profile error:", profileError);
+    showPage('page-login');
+    return;
+  }
+
+  if (profile.status === "banned") {
+
+    await noteSphereSupabase.auth.signOut();
+
+    alert("Your account has been banned from NoteSphere.");
+
+    showPage('page-login');
+
+    return;
+  }
+
+  // Create QBank user from NoteSphere account
+  state.user = {
+    id: session.user.id,
+    name: profile.full_name,
+    email: session.user.email,
+    studentId: profile.student_id
+  };
+
+  const d =
+    loadUserData(session.user.id);
 
   state.progress = d.progress;
   state.solvedSet = d.solvedSet;
-
-  saveState();
 
   initMain();
 
@@ -560,15 +581,10 @@ document.getElementById('logout-btn')
 
     closeProfile();
 
+    // Do NOT sign out of NoteSphere.
+    // QBank uses the NoteSphere session.
     showPage('page-login');
-
-    document.getElementById('inp-name')
-      .value = '';
-
-    document.getElementById('inp-email')
-      .value = '';
   });
-
 function openProfile(){
 
   const u = state.user;
