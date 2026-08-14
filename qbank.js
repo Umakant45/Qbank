@@ -138,9 +138,6 @@ function initAfterQuestionsLoad() {
 }
 
 
-// ============================================================
-// START QBANK
-// ============================================================
 
 
 
@@ -1597,107 +1594,5 @@ function closeProfileOnBg(event) {
   }
 }
 document.addEventListener("DOMContentLoaded", function () {
-
-    const loginBtn = document.getElementById("login-btn");
-    const nameInput = document.getElementById("inp-name");
-    const emailInput = document.getElementById("inp-email");
-
-    loginBtn.addEventListener("click", function () {
-
-        const name = nameInput.value.trim();
-        const email = emailInput.value.trim();
-
-        if (name === "") {
-            alert("Please enter your name.");
-            nameInput.focus();
-            return;
-        }
-
-        if (email === "") {
-            alert("Please enter your email.");
-            emailInput.focus();
-            return;
-        }
-
-        if (!email.includes("@")) {
-            alert("Please enter a valid email.");
-            emailInput.focus();
-            return;
-        }
-
-        // Create user
-        state.user = {
-            id: email.toLowerCase(),
-            name: name,
-            email: email
-        };
-
-        // Load previous progress
-        const userData = loadUserData(state.user.id);
-
-        state.progress = userData.progress;
-        state.solvedSet = userData.solvedSet;
-
-        // Open QBank
-        initMain();
-        showPage("page-main");
-
-    });
-
-});
-document.addEventListener("DOMContentLoaded", function () {
-
-    const loginBtn = document.getElementById("login-btn");
-    const nameInput = document.getElementById("inp-name");
-    const emailInput = document.getElementById("inp-email");
-
-    if (!loginBtn) {
-        console.error("login-btn not found");
-        return;
-    }
-
-    loginBtn.addEventListener("click", function () {
-
-        console.log("GET STARTED CLICKED");
-
-        const name = nameInput.value.trim();
-        const email = emailInput.value.trim();
-
-        if (!name) {
-            alert("Please enter your name");
-            nameInput.focus();
-            return;
-        }
-
-        if (!email) {
-            alert("Please enter your email");
-            emailInput.focus();
-            return;
-        }
-
-        if (!email.includes("@")) {
-            alert("Please enter a valid email");
-            emailInput.focus();
-            return;
-        }
-
-        state.user = {
-            id: email.toLowerCase(),
-            name: name,
-            email: email
-        };
-
-        const userData = loadUserData(state.user.id);
-
-        state.progress = userData.progress;
-        state.solvedSet = userData.solvedSet;
-
-        initMain();
-
-        showPage("page-main");
-
-        console.log("QBank opened");
-
-    });
-
+    loadQuestions();
 });

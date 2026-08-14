@@ -28,11 +28,13 @@
         <input type="text" id="inp-name" placeholder="e.g. Umakant Kautkar" autocomplete="name">
       </div>
       <div class="lfield">
-        <label>Email Address</label>
-        <input type="email" id="inp-email" placeholder="e.g. uma@college.edu" autocomplete="email">
-      <button class="btn-login" id="login-btn" type="button" onclick="startQBank()">
-    Get Started →
-</button>
+  <label>Email Address</label>
+  <input type="email" id="inp-email" placeholder="e.g. uma@college.edu" autocomplete="email">
+</div>
+
+<button class="btn-login" id="login-btn" type="button" onclick="startQBank()">
+  Get Started →
+</button>>
     <div class="login-stats fade-up-2">
       <div class="lstat">
         <div class="lstat-num">8</div>
@@ -158,55 +160,67 @@
 <script>
 function startQBank() {
 
-    const name = document.getElementById("inp-name").value.trim();
-    const email = document.getElementById("inp-email").value.trim();
+    const nameInput = document.getElementById("inp-name");
+    const emailInput = document.getElementById("inp-email");
 
-    if (name === "") {
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+
+    if (!name) {
         alert("Please enter your name.");
+        nameInput.focus();
         return;
     }
 
-    if (email === "") {
-        alert("Please enter your email.");
-        return;
-    }
-
-    if (!email.includes("@")) {
+    if (!email || !email.includes("@")) {
         alert("Please enter a valid email.");
+        emailInput.focus();
         return;
     }
 
     // Save user
-    localStorage.setItem("qbank_name", name);
-    localStorage.setItem("qbank_email", email);
+    state.user = {
+        id: email.toLowerCase(),
+        name: name,
+        email: email
+    };
+
+    // Load previous progress
+    const userData = loadUserData(state.user.id);
+
+    state.progress = userData.progress;
+    state.solvedSet = userData.solvedSet;
 
     // Hide login
     document.getElementById("page-login").classList.remove("active");
 
-    // Show QBank
+    // Show main page
     document.getElementById("page-main").classList.add("active");
 
-    // Show user's name
+    // Show subjects
+    showSubjectsView();
+
+    // Update greeting
     const topbar = document.getElementById("topbar-center");
 
     if (topbar) {
-        topbar.textContent = "Hey, " + name.split(" ")[0] + " 👋";
+        topbar.textContent =
+            "Hey, " + name.split(/\s+/)[0] + " 👋";
     }
 
-    // Show initials
+    // Update profile initials
     const profile = document.getElementById("profile-btn");
 
     if (profile) {
-        profile.textContent = name
-            .split(/\s+/)
-            .map(word => word[0])
-            .join("")
-            .toUpperCase()
-            .slice(0, 2);
+        profile.textContent = getInitials(name);
     }
+
+    // Build subject cards
+    buildSubjectsGrid();
+
+    console.log("QBank opened successfully");
 }
 </script>
 </body>
 </html>
-</body>
-</html>
+

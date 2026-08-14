@@ -40,8 +40,13 @@ input{font-family:'DM Sans',sans-serif}
 .fade-up-4{animation:fadeUp .45s .2s ease both}
 
 /* ===================== PAGE SYSTEM ===================== */
-.page{display:none}
-.page.active{display:flex;flex-direction:column;min-height:100vh}
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
 
 /* ===================== LOGIN PAGE ===================== */
 #page-login{
