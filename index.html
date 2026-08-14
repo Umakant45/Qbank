@@ -30,9 +30,9 @@
       <div class="lfield">
         <label>Email Address</label>
         <input type="email" id="inp-email" placeholder="e.g. uma@college.edu" autocomplete="email">
-      </div>
-      <button class="btn-login" id="login-btn">Get Started →</button>
-    </div>
+      <button class="btn-login" id="login-btn" type="button" onclick="startQBank()">
+    Get Started →
+</button>
     <div class="login-stats fade-up-2">
       <div class="lstat">
         <div class="lstat-num">8</div>
@@ -155,5 +155,58 @@
 </div>
 
 <script src="qbank.js"></script>
+<script>
+function startQBank() {
+
+    const name = document.getElementById("inp-name").value.trim();
+    const email = document.getElementById("inp-email").value.trim();
+
+    if (name === "") {
+        alert("Please enter your name.");
+        return;
+    }
+
+    if (email === "") {
+        alert("Please enter your email.");
+        return;
+    }
+
+    if (!email.includes("@")) {
+        alert("Please enter a valid email.");
+        return;
+    }
+
+    // Save user
+    localStorage.setItem("qbank_name", name);
+    localStorage.setItem("qbank_email", email);
+
+    // Hide login
+    document.getElementById("page-login").classList.remove("active");
+
+    // Show QBank
+    document.getElementById("page-main").classList.add("active");
+
+    // Show user's name
+    const topbar = document.getElementById("topbar-center");
+
+    if (topbar) {
+        topbar.textContent = "Hey, " + name.split(" ")[0] + " 👋";
+    }
+
+    // Show initials
+    const profile = document.getElementById("profile-btn");
+
+    if (profile) {
+        profile.textContent = name
+            .split(/\s+/)
+            .map(word => word[0])
+            .join("")
+            .toUpperCase()
+            .slice(0, 2);
+    }
+}
+</script>
+</body>
+</html>
 </body>
 </html>
