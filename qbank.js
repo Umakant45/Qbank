@@ -137,7 +137,7 @@ async function loadQuestions() {
     totalElement.textContent = total;
   }
 
-});
+};
 
 
 // ============================================================
@@ -1727,7 +1727,45 @@ function logout() {
 
 }
 
+async function loadQuestions() {
+    const subjects = SUBJECTS_META.map(s => s.id);
 
+    try {
+        for (const subject of subjects) {
+            const response = await fetch(`questions/${subject}.json`);
+
+            if (!response.ok) {
+                throw new Error(
+                    `Failed to load questions/${subject}.json`
+                );
+            }
+
+            QUESTION_BANK[subject] = await response.json();
+        }
+
+        let total = 0;
+
+        for (const subject in QUESTION_BANK) {
+            total += QUESTION_BANK[subject].length;
+        }
+
+        const totalElement = document.getElementById("total-q-count");
+
+        if (totalElement) {
+            totalElement.textContent = total;
+        }
+
+        showPage("page-login");
+
+    } catch (error) {
+        console.error("Question loading error:", error);
+        alert("Unable to load questions. Check the questions folder and run using Live Server.");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    loadQuestions();
+});
 // ============================================================
 // AUTO RESTORE LOGIN? NO
 // ============================================================
